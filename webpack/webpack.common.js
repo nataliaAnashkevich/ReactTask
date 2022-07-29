@@ -64,6 +64,11 @@ module.exports = {
     },
     open: true
   },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    hot: true
+  },
   resolve: {
     modules: ['src', 'node_modules'],
     extensions: ['*', '.js', '.jsx', '.css', '.scss']
