@@ -8,8 +8,8 @@ const userGeoDataReceived = ({ position, location }) => ({
 });
 
 export const fetchUserGeoData = () => async dispatch => {
-    const position = await getUserCurrentPosition();
-    const { longitude, latitude } = position.coords;
-    const location = await getLocationByCoords(longitude, latitude);
-    return dispatch(userGeoDataReceived({ position: position.coords, location }));
+  const position = await getUserCurrentPosition();
+  const { longitude, latitude } = position.coords;
+  const location = await getLocationByCoords(longitude, latitude);
+  return dispatch(userGeoDataReceived({ position: position.coords, location }));
 };

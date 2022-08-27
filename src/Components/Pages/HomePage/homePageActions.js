@@ -10,7 +10,7 @@ export const HOMEPAGE_ACTIONS = {
 
 const userPositionWeatherRequested = () => ({
   type: HOMEPAGE_ACTIONS.USER_POSITION_WEATHER_REQUESTED
-})
+});
 
 const userPositionWeatherReceived = ({ currentWeather }) => ({
   type: HOMEPAGE_ACTIONS.USER_POSITION_WEATHER_RECEIVED,
