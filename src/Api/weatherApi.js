@@ -18,3 +18,8 @@ export const getLocationByCoords = async (longitude, latitude) => {
     country: result.data.country
   };
 };
+
+export const getHourlyWeather = async (longitude, latitude) => {
+  const result = await instance.get(`/forecast/hourly/${longitude},${latitude}`);
+  return result.data.forecast;
+};
