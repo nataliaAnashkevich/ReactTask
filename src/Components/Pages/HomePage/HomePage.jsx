@@ -6,6 +6,7 @@ import Loader from '../../Loader/Loader';
 import { capitalize, toReadableDate, toReadableTime } from '../../../helpers/formatHelper';
 import { getLocation } from '../../../Store/selectors/geoSelectors';
 import { getCurrentWeather, getLoading } from './homePageSelectors';
+import CurrentLocation from '../../CurrentLocation/CurrentLocation';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -20,12 +21,8 @@ function HomePage() {
   return (
     <>
       <h1>Home</h1>
-      {location && (
-        <h2>
-          {location.city}, {location.country}
-        </h2>
-      )}
       {loading && <Loader />}
+      {location && <CurrentLocation currentLocation={location}/>}
       {currentWeather && <p>{toReadableDate(currentWeather.current.time)}</p>}
       {currentWeather && <p>{toReadableTime(currentWeather.current.time)}</p>}
       {currentWeather && <p>Probability of precipitation: {currentWeather.current.precipProb}%</p>}

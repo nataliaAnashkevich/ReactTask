@@ -8,7 +8,7 @@ export const detailedForecastPageReducer = (state = initialState, { type, payloa
       return produce(state, draft => {
         draft.loading = true;
         draft.error = null;
-      })
+      });
     case DETAILED_FORECAST_PAGE_ACTIONS.USER_POSITION_DETAILED_WEATHER_RECEIVED:
       return produce(state, draft => {
         draft.loading = false;

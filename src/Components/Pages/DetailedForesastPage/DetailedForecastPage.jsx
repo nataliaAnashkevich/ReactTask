@@ -5,6 +5,7 @@ import HourlyWeatherItem from '../../HourlyWeatherItem/HourlyWeatherItem';
 import { fetchUserLocationDetailedWeather } from './detailedForecastPageActions';
 import { getHourlyWeather, getLoading } from './detailedForecastPageSelectors';
 import Loader from '../../Loader/Loader';
+import CurrentLocation from '../../CurrentLocation/CurrentLocation';
 
 function DetailedForecastPage() {
   const dispatch = useDispatch();
@@ -19,12 +20,8 @@ function DetailedForecastPage() {
   return (
     <div>
       <h1>Detailed Page</h1>
-      {location && (
-        <h2>
-          {location.city}, {location.country}
-        </h2>
-      )}
       {loading && <Loader />}
+      {location && <CurrentLocation currentLocation={location}/>}
       {hourlyWeather &&
         hourlyWeather.map((hourlyItem, _index) => (
           <HourlyWeatherItem key={_index} hourly={hourlyItem} />
