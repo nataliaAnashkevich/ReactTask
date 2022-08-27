@@ -1,20 +1,21 @@
+import produce from 'immer';
+
 export const GEO_ACTIONS = {
   USER_GEO_DATA_RECEIVED: 'USER_GEO_DATA_RECEIVED'
 };
 
 const initialState = {
   position: null,
-  location: null,
+  location: null
 };
 
-export const geoReducer = (state = initialState, { type, payload }) => {
+const geoReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GEO_ACTIONS.USER_GEO_DATA_RECEIVED:
-      return {
-        ...state,
-        position: payload.position,
-        location: payload.location,
-      };
+      return produce(state, draft => {
+        draft.position = payload.position;
+        draft.location = payload.location;
+      });
     default:
       return state;
   }
