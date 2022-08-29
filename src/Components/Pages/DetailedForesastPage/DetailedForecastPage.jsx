@@ -23,9 +23,9 @@ function DetailedForecastPage() {
       {loading && <Loader />}
       {location && <CurrentLocation currentLocation={location}/>}
       {hourlyWeather &&
-        hourlyWeather.map((hourlyItem, _index) => (
-          <HourlyWeatherItem key={_index} hourly={hourlyItem} />
-        ))}
+      hourlyWeather.map(hourlyItem => (
+        <HourlyWeatherItem key={`${location.id}_${hourlyItem.time}`} hourly={hourlyItem} />
+      ))}
     </div>
   );
 }
