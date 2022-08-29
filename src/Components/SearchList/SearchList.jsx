@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import styles from './searchList.css';
 
 export default function SearchList({ items, onItemClick }) {
@@ -6,13 +5,11 @@ export default function SearchList({ items, onItemClick }) {
 }
 
 function SearchItem({ item, onItemClick }) {
-  const itemClickHandler = useCallback(
-    e => {
-      e.preventDefault();
+  const itemClickHandler = e => {
+    if (onItemClick) {
       onItemClick(e, item);
-    },
-    [onItemClick, item]
-  );
+    }
+  };
 
   return (
     <div className={styles.searchResultItem} onClick={itemClickHandler}>

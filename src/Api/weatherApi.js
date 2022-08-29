@@ -8,7 +8,7 @@ const instance = axios.create({
 
 export const getCurrentWeather = async (longitude, latitude) => {
   const result = await instance.get(`/current/${longitude},${latitude}`);
-  return result.data;
+  return result.data.current;
 };
 
 export const getLocationByCoords = async (longitude, latitude) => {

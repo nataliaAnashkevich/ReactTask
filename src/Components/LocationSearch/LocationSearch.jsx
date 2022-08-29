@@ -16,12 +16,11 @@ function LocationSearch({ onItemClick, onError }) {
   }, [searchFieldValue, onError]);
 
   const handleChange = e => {
-    e.preventDefault();
     setSearchFieldValue(e.target.value);
   };
 
   const itemClickedHandler = (e, item) => {
-    onItemClick && onItemClick(item);
+    if (onItemClick) {onItemClick(item)}
     setSearchResult(null);
     setSearchFieldValue('');
   };

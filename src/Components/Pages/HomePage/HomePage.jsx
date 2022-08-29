@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserLocationWeather } from './homePageActions';
-import SafeWeatherImage from '../../SafeImage/SafeWeatherImage';
 import Loader from '../../Loader/Loader';
-import { capitalize, toReadableDate, toReadableTime } from '../../../helpers/formatHelper';
 import { getLocation } from '../../../Store/selectors/geoSelectors';
 import { getCurrentWeather, getLoading } from './homePageSelectors';
 import CurrentLocation from '../../CurrentLocation/CurrentLocation';
+import WeatherCard from '../../WeatherCard/WeatherCard';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -22,14 +21,8 @@ function HomePage() {
     <>
       <h1>Home</h1>
       {loading && <Loader />}
-      {location && <CurrentLocation currentLocation={location}/>}
-      {currentWeather && <p>{toReadableDate(currentWeather.current.time)}</p>}
-      {currentWeather && <p>{toReadableTime(currentWeather.current.time)}</p>}
-      {currentWeather && <p>Probability of precipitation: {currentWeather.current.precipProb}%</p>}
-      {currentWeather && <p>Pressure (hPa) {currentWeather.current.pressure}%</p>}
-      {currentWeather && <p>Wind speed (m/s) {currentWeather.current.windSpeed}</p>}
-      {currentWeather && <p>{capitalize(currentWeather.current.symbolPhrase)}</p>}
-      {currentWeather && <SafeWeatherImage symbolCode={currentWeather.current.symbol} />}
+      {location && <CurrentLocation currentLocation={location} />}
+      {currentWeather && <WeatherCard {...currentWeather} />}
     </>
   );
 }

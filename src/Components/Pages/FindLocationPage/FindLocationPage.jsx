@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router';
 import { getLocationById, getCurrentWeather } from '../../../Api/weatherApi';
 import LocationSearch from '../../LocationSearch/LocationSearch';
 import CurrentLocation from '../../CurrentLocation/CurrentLocation';
-import { capitalize } from '../../../helpers/formatHelper';
-import SafeWeatherImage from '../../SafeImage/SafeWeatherImage';
+import WeatherCard from '../../WeatherCard/WeatherCard';
 
 function FindLocation() {
   const navigate = useNavigate();
@@ -14,21 +13,21 @@ function FindLocation() {
   const [currentWeather, setCurrentWeather] = useState();
   const [error, setError] = useState();
 
-  useEffect(async () => {
+  useEffect(() => {
     if (locationId) {
-      await invokeAction(async () => {
+      invokeAction(async () => {
         const results = await getLocationById(locationId);
         setSelectedLocation(results);
       });
     } else {
-      setSelectedLocation(undefined);
-      setCurrentWeather(undefined);
+      setSelectedLocation(null);
+      setCurrentWeather(null);
     }
   }, [locationId]);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (selectedLocation) {
-      await invokeAction(async () => {
+      invokeAction(async () => {
         const results = await getCurrentWeather(
           selectedLocation.longitude,
           selectedLocation.latitude
@@ -42,9 +41,9 @@ function FindLocation() {
     navigate(`/findLocation/${item.id}`);
   };
 
-  const searchErrorHandler = error => {
+  const searchErrorHandler = useCallback(error => {
     setError(error);
-  };
+  }, []);
 
   async function invokeAction(action) {
     try {
@@ -60,10 +59,7 @@ function FindLocation() {
       <LocationSearch onItemClick={itemChooseHandler} onError={searchErrorHandler} />
       {error && <p>Error occurred. Please, try to search again later</p>}
       {selectedLocation && <CurrentLocation currentLocation={selectedLocation} />}
-      {currentWeather && <p>Temperature: {currentWeather.current.temperature}%</p>}
-      {currentWeather && <p>Probability of precipitation: {currentWeather.current.precipProb}%</p>}
-      {currentWeather && <p>{capitalize(currentWeather.current.symbolPhrase)}</p>}
-      {currentWeather && <SafeWeatherImage symbolCode={currentWeather.current.symbol} />}
+      {currentWeather && <WeatherCard {...currentWeather} />}
       <Outlet />
     </div>
   );
