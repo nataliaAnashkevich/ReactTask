@@ -14,7 +14,13 @@ export const getCurrentWeather = async (longitude, latitude) => {
 export const getLocationByCoords = async (longitude, latitude) => {
   const result = await instance.get(`/location/${longitude},${latitude}`);
   return {
+    id: result.data.id,
     city: result.data.name,
     country: result.data.country
   };
+};
+
+export const getHourlyWeather = async (longitude, latitude) => {
+  const result = await instance.get(`/forecast/hourly/${longitude},${latitude}`);
+  return result.data.forecast;
 };
