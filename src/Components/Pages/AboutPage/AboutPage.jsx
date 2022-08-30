@@ -1,8 +1,15 @@
 function AboutPage() {
   return (
-    <div>
+    <>
       <h1>About</h1>
-    </div>
+      <p>
+        Weather data is provided by{' '}
+        <a href={'https://developer.foreca.com'} target="_blank">
+          Foreca
+        </a>{' '}
+        service.
+      </p>
+    </>
   );
 }
 
