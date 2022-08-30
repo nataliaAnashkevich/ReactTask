@@ -6,13 +6,17 @@ function LocationSearch({ onItemClick, onError }) {
   const [searchFieldValue, setSearchFieldValue] = useState('');
   const [searchResult, setSearchResult] = useState();
 
-  useEffect(async () => {
-    try {
-      const results = await getLocations(searchFieldValue);
-      setSearchResult(results);
-    } catch (error) {
-      onError && onError(error);
-    }
+  useEffect(() => {
+    (async () => {
+      try {
+        const results = await getLocations(searchFieldValue);
+        setSearchResult(results);
+      } catch (error) {
+        if (onError) {
+          onError(error)
+        }
+      }
+    })();
   }, [searchFieldValue, onError]);
 
   const handleChange = e => {

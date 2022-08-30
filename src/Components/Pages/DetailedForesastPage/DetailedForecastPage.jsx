@@ -13,7 +13,7 @@ function DetailedForecastPage() {
   const hourlyWeather = useSelector(getHourlyWeather);
   const loading = useSelector(getLoading);
 
-  useEffect(async () => {
+  useEffect(() => {
     dispatch(fetchUserLocationDetailedWeather());
   }, []);
 
