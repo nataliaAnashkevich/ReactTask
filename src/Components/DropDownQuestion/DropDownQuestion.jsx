@@ -14,13 +14,12 @@ function DropDownQuestion({ onChange, value }) {
   };
 
   return (
-    <>
-      <select value={value} onChange={handleLocationChange}>
-        {region.map(item => (
-          <option key={item}>{item}</option>
-        ))};
-      </select>
-    </>
+    <select value={value} onChange={handleLocationChange}>
+      {region.map(item => (
+        <option key={item}>{item}</option>
+      ))}
+      ;
+    </select>
   );
 }
 
