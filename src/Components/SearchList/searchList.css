@@ -1,0 +1,9 @@
+.searchResultItem {
+  background-color: lightskyblue;
+  margin: 0;
+  border: 1px solid greenyellow;
+  max-width: 300pt;
+}
+.searchResultItem:hover {
+  background-color: greenyellow;
+}
